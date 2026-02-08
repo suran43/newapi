@@ -29,7 +29,7 @@ namespace newapi.Controllers
             })
             .ToArray();
         }
-        [HttpGet(Name = "GetWeatherForecast")]
+        [HttpGet(Name = "GetWeatherForecas111t")]
         public IEnumerable<WeatherForecast> Ge1t()
         {
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
