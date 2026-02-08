@@ -1,0 +1,31 @@
+name: Deploy .NET 8 API to Local IIS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build -c Release --no-restore
+
+      - name: Publish to IIS
+        run: dotnet publish -c Release -o C:\inetpub\MyApi
+
+      - name: Restart IIS
+        run: iisreset
