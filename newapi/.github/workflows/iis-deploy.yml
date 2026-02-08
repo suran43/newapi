@@ -10,22 +10,13 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      - name: Checkout source code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Install .NET 8 SDK
-        uses: actions/setup-dotnet@v4
+      - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
 
-      - name: Restore NuGet packages
-        run: dotnet restore
-
-      - name: Build application
-        run: dotnet build --configuration Release --no-restore
-
-      - name: Publish to IIS folder
-        run: dotnet publish -c Release -o C:\inetpub\MyApi
-
-      - name: Restart IIS
-        run: iisreset
+      - run: dotnet restore
+      - run: dotnet build -c Release --no-restore
+      - run: dotnet publish -c Release -o C:\inetpub\MyApi
+      - run: iisreset
